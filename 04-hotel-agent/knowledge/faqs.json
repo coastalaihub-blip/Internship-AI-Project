@@ -1,0 +1,177 @@
+[
+  {
+    "id": "hotel_001",
+    "question": "What are the room types and rates?",
+    "answer": "We offer three room types: Standard Room at ₹2,500/night (AC, TV, WiFi), Deluxe Room at ₹4,500/night (AC, TV, WiFi, mini-bar, city view), and Suite at ₹8,000/night (AC, TV, WiFi, mini-bar, Jacuzzi, premium amenities).",
+    "category": "rooms",
+    "tags": ["room", "rates", "price", "types", "standard", "deluxe", "suite"]
+  },
+  {
+    "id": "hotel_002",
+    "question": "What time is check-in and check-out?",
+    "answer": "Standard check-in is at 2 PM and check-out is at 12 noon. Early check-in (from 9 AM) and late check-out (until 6 PM) are available subject to availability at ₹500 each.",
+    "category": "policies",
+    "tags": ["check-in", "check-out", "time", "arrival", "departure"]
+  },
+  {
+    "id": "hotel_003",
+    "question": "Is early check-in available?",
+    "answer": "Yes, early check-in from 9 AM onwards is available for an additional ₹500, subject to room availability. Please inform us at the time of booking so we can prepare accordingly.",
+    "category": "policies",
+    "tags": ["early check-in", "early arrival", "morning", "before 2pm"]
+  },
+  {
+    "id": "hotel_004",
+    "question": "Can I get a late check-out?",
+    "answer": "Late check-out until 6 PM is available for ₹500 extra, subject to availability. After 6 PM, an additional night's charge applies. Please request at the front desk by 10 AM on checkout day.",
+    "category": "policies",
+    "tags": ["late check-out", "extended stay", "extra time", "afternoon checkout"]
+  },
+  {
+    "id": "hotel_005",
+    "question": "What is the cancellation policy?",
+    "answer": "Free cancellation up to 48 hours before check-in. Cancellations within 48 hours incur 1 night's charge. No-shows are charged the full booking amount.",
+    "category": "policies",
+    "tags": ["cancellation", "cancel booking", "refund", "policy"]
+  },
+  {
+    "id": "hotel_006",
+    "question": "Is WiFi available in all rooms?",
+    "answer": "Yes, complimentary high-speed WiFi (100 Mbps) is available in all rooms and common areas throughout the hotel, 24/7. Password is provided at check-in.",
+    "category": "amenities",
+    "tags": ["WiFi", "internet", "broadband", "connectivity"]
+  },
+  {
+    "id": "hotel_007",
+    "question": "Are pets allowed at the hotel?",
+    "answer": "We are a pet-friendly hotel! Small pets (under 10 kg) are welcome in Standard and Deluxe rooms for an additional ₹500/night. A pet amenity kit is provided. Advance intimation required.",
+    "category": "policies",
+    "tags": ["pets", "dogs", "cats", "animals", "pet-friendly"]
+  },
+  {
+    "id": "hotel_008",
+    "question": "Is parking available?",
+    "answer": "Yes, we offer complimentary valet parking for in-house guests. We have parking for 100 cars and 50 two-wheelers in our basement. Electric vehicle charging points are also available.",
+    "category": "amenities",
+    "tags": ["parking", "valet", "car park", "EV", "two-wheeler"]
+  },
+  {
+    "id": "hotel_009",
+    "question": "Do you offer extra beds?",
+    "answer": "Yes, extra beds (rollaway cots) are available for ₹800/night in Standard and Deluxe rooms. Suites can accommodate up to 4 guests. Baby cribs are complimentary on request.",
+    "category": "rooms",
+    "tags": ["extra bed", "rollaway", "cot", "additional guest", "child"]
+  },
+  {
+    "id": "hotel_010",
+    "question": "What amenities are included in the rooms?",
+    "answer": "All rooms include AC, LCD TV (50+ channels), WiFi, miniature toiletries, hair dryer, safe deposit box, tea/coffee maker, daily housekeeping, and 24/7 room service.",
+    "category": "amenities",
+    "tags": ["amenities", "facilities", "included", "room facilities", "what's in the room"]
+  },
+  {
+    "id": "hotel_011",
+    "question": "What are the breakfast timings?",
+    "answer": "Breakfast buffet is served from 7 AM to 10:30 AM in our main restaurant. Continental breakfast is included for Deluxe and Suite guests. Standard room guests can add breakfast for ₹350/person.",
+    "category": "restaurant",
+    "tags": ["breakfast", "morning", "buffet", "timing", "included"]
+  },
+  {
+    "id": "hotel_012",
+    "question": "What are the room service hours?",
+    "answer": "Room service is available 24 hours a day, 7 days a week. Our full menu is available from 7 AM to 11 PM. After 11 PM, a limited late-night menu is available.",
+    "category": "restaurant",
+    "tags": ["room service", "delivery", "food delivery", "timing", "24 hours"]
+  },
+  {
+    "id": "hotel_013",
+    "question": "Do you have vegetarian options?",
+    "answer": "Yes! About 60% of our menu is vegetarian. We offer Masala Dosa, Idli Sambar, Pav Bhaji, Dal Makhani, Paneer Tikka, Veg Fried Rice, and more. We also accommodate Jain food on request.",
+    "category": "restaurant",
+    "tags": ["vegetarian", "veg", "Jain", "plant-based", "no meat"]
+  },
+  {
+    "id": "hotel_014",
+    "question": "How long does room service take?",
+    "answer": "Room service typically takes 20-30 minutes during non-peak hours. During busy periods (8-10 AM and 7-9 PM), it may take up to 45 minutes. We'll inform you at time of order.",
+    "category": "restaurant",
+    "tags": ["delivery time", "room service time", "how long", "wait time"]
+  },
+  {
+    "id": "hotel_015",
+    "question": "What payment methods are accepted?",
+    "answer": "We accept cash (INR), all major credit/debit cards, UPI (GPay, PhonePe, Paytm), and net banking. We also accept international cards (Visa, Mastercard, Amex). Foreign currency exchange available at front desk.",
+    "category": "payment",
+    "tags": ["payment", "cash", "UPI", "card", "methods", "forex"]
+  },
+  {
+    "id": "hotel_016",
+    "question": "Where is the hotel located?",
+    "answer": "Grand Mahal Hotel is located at 15, Residency Road, Bengaluru — 2 km from MG Road Metro Station and 35 km from Kempegowda International Airport. Airport taxi available for ₹1200.",
+    "category": "location",
+    "tags": ["location", "address", "directions", "how to reach", "map"]
+  },
+  {
+    "id": "hotel_017",
+    "question": "Do you offer airport pickup?",
+    "answer": "Yes, we offer airport pickup from Kempegowda International Airport for ₹1200 (sedan) or ₹1800 (SUV). Please share your flight details 24 hours in advance to arrange a driver.",
+    "category": "transport",
+    "tags": ["airport", "pickup", "transfer", "taxi", "cab"]
+  },
+  {
+    "id": "hotel_018",
+    "question": "Is there a gym or swimming pool?",
+    "answer": "Yes! We have a fully-equipped gym (5 AM to 10 PM), an outdoor swimming pool (6 AM to 9 PM), and a spa. All facilities are complimentary for in-house guests.",
+    "category": "amenities",
+    "tags": ["gym", "pool", "swimming", "fitness", "spa"]
+  },
+  {
+    "id": "hotel_019",
+    "question": "Do you offer laundry service?",
+    "answer": "Yes, laundry and dry cleaning services are available. Same-day service (by 9 AM, returned by 7 PM) charges ₹100-300 per item. Express 4-hour service available at 50% surcharge.",
+    "category": "services",
+    "tags": ["laundry", "dry cleaning", "clothes", "washing", "pressing"]
+  },
+  {
+    "id": "hotel_020",
+    "question": "Do you offer sightseeing or tour packages?",
+    "answer": "Yes, our concierge desk arranges customised city tours and outstation packages. Popular options: Bengaluru city tour (half-day ₹1500, full-day ₹2500), Mysore day trip (₹3500/person).",
+    "category": "tours",
+    "tags": ["tours", "sightseeing", "packages", "day trip", "Mysore", "city tour"]
+  },
+  {
+    "id": "hotel_021",
+    "question": "Are children allowed? Any special facilities?",
+    "answer": "Children are most welcome! We have a dedicated kids play area, a children's menu, baby cribs (complimentary), and babysitting service (₹200/hour, advance booking required).",
+    "category": "families",
+    "tags": ["children", "kids", "family", "baby", "play area"]
+  },
+  {
+    "id": "hotel_022",
+    "question": "Can I book a room for a function or event?",
+    "answer": "We have two banquet halls (100 and 250 guests) and three conference rooms for corporate events. Contact our events team at events@grandmahal.in or ask at the front desk for packages.",
+    "category": "events",
+    "tags": ["banquet", "event", "function", "conference", "wedding", "corporate"]
+  },
+  {
+    "id": "hotel_023",
+    "question": "What is the check-out process?",
+    "answer": "On check-out day, please call the front desk to request your final bill. Settlement can be done via any payment method. Leave your key card at reception. Check-out must be by 12 noon.",
+    "category": "policies",
+    "tags": ["checkout", "process", "bill", "payment", "key card"]
+  },
+  {
+    "id": "hotel_024",
+    "question": "Is there a restaurant in the hotel?",
+    "answer": "Yes, we have 'Spice Garden' — our multi-cuisine restaurant serving South Indian, North Indian, and Continental dishes. Open 7 AM to 11 PM. Separate bar (Amber Lounge) open 12 noon to 11 PM.",
+    "category": "restaurant",
+    "tags": ["restaurant", "dining", "food", "bar", "Spice Garden"]
+  },
+  {
+    "id": "hotel_025",
+    "question": "How do I modify or cancel my booking?",
+    "answer": "To modify dates or room type, contact us at least 48 hours before check-in — message here or call +91-80-12345678. Cancellations within 48 hours of check-in incur 1 night's charge.",
+    "category": "booking",
+    "tags": ["modify booking", "change booking", "cancel", "edit reservation"]
+  }
+]

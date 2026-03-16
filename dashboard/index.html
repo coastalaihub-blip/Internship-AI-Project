@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internship AI Project — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Internship AI Project</h1>
+    <span class="badge">Live</span>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-card messages">
+      <div class="value" id="stat-messages">—</div>
+      <div class="label">Messages Today</div>
+    </div>
+    <div class="stat-card bookings">
+      <div class="value" id="stat-bookings">—</div>
+      <div class="label">Appointments Today</div>
+    </div>
+    <div class="stat-card orders">
+      <div class="value" id="stat-orders">—</div>
+      <div class="label">Food Orders Today</div>
+    </div>
+    <div class="stat-card escalations">
+      <div class="value" id="stat-escalations">—</div>
+      <div class="label">Escalations Today</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Live Feed Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Live Conversation Feed</h2>
+        <div class="filter-bar">
+          <select id="bot-filter">
+            <option value="all">All Bots</option>
+            <option value="personal_agent">Personal Agent</option>
+            <option value="receptionist">Receptionist</option>
+            <option value="call_center">Call Center</option>
+            <option value="hotel">Hotel</option>
+          </select>
+          <button id="refresh-btn">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="panel-body" id="conv-feed">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <p>Loading conversations...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Actions Log</h2>
+      </div>
+      <div class="panel-body" id="actions-feed">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <p>Loading actions...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

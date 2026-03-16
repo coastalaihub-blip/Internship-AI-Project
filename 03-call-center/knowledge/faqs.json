@@ -1,0 +1,177 @@
+[
+  {
+    "id": "cc_001",
+    "question": "How do I track my order?",
+    "answer": "You can track your order by visiting our website and entering your Order ID in the 'Track Order' section. You'll also receive SMS updates at every delivery stage.",
+    "category": "orders",
+    "tags": ["track", "order", "delivery", "status", "shipment"]
+  },
+  {
+    "id": "cc_002",
+    "question": "How long does delivery take?",
+    "answer": "Standard delivery takes 3-5 business days within India. Express delivery (1-2 days) is available for an additional ₹99. Orders placed before 2 PM are dispatched the same day.",
+    "category": "delivery",
+    "tags": ["delivery", "shipping", "time", "days", "express"]
+  },
+  {
+    "id": "cc_003",
+    "question": "What is your return policy?",
+    "answer": "We offer a 30-day return policy on all products. Items must be unused, in original packaging, with all tags intact. Refund is processed within 7 business days of return.",
+    "category": "returns",
+    "tags": ["return", "policy", "exchange", "send back"]
+  },
+  {
+    "id": "cc_004",
+    "question": "How do I return a product?",
+    "answer": "To return a product, log in to your account, go to 'My Orders', select the item, and click 'Return'. Our courier partner will pick up the item from your address within 2 business days.",
+    "category": "returns",
+    "tags": ["return", "how to", "process", "pickup", "courier"]
+  },
+  {
+    "id": "cc_005",
+    "question": "When will I get my refund?",
+    "answer": "Once the return is picked up and verified, refund is processed within 5-7 business days. UPI/wallet refunds are faster (1-3 days). You'll receive an email confirmation.",
+    "category": "refund",
+    "tags": ["refund", "money back", "when", "days", "processed"]
+  },
+  {
+    "id": "cc_006",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept UPI (GPay, PhonePe, Paytm), credit/debit cards, net banking, EMI, and Cash on Delivery (COD) for orders under ₹5000.",
+    "category": "payment",
+    "tags": ["payment", "UPI", "card", "COD", "EMI", "methods"]
+  },
+  {
+    "id": "cc_007",
+    "question": "Is Cash on Delivery available?",
+    "answer": "Yes, Cash on Delivery is available for orders up to ₹5000. COD is not available for certain remote pincodes and digital products.",
+    "category": "payment",
+    "tags": ["COD", "cash on delivery", "cash", "payment"]
+  },
+  {
+    "id": "cc_008",
+    "question": "What is your product warranty?",
+    "answer": "Electronics come with a 1-year manufacturer warranty. Home appliances have 2-year warranty. Accessories and fashion items do not carry warranty. Warranty card is provided in the box.",
+    "category": "warranty",
+    "tags": ["warranty", "guarantee", "repair", "defective", "year"]
+  },
+  {
+    "id": "cc_009",
+    "question": "How do I file a complaint?",
+    "answer": "You can file a complaint here in this chat, through our website's 'Help Center', or by emailing support@techmart.in. Provide your order ID and a brief description of the issue.",
+    "category": "complaint",
+    "tags": ["complaint", "issue", "problem", "file", "register"]
+  },
+  {
+    "id": "cc_010",
+    "question": "I received a damaged product. What should I do?",
+    "answer": "We're sorry for the inconvenience! Please take a photo of the damaged item and packaging, then raise a return/replacement request within 48 hours of delivery. We'll arrange a replacement immediately.",
+    "category": "complaint",
+    "tags": ["damaged", "broken", "defective", "wrong item", "complaint"]
+  },
+  {
+    "id": "cc_011",
+    "question": "How do I cancel my order?",
+    "answer": "Orders can be cancelled before dispatch by going to 'My Orders' and clicking 'Cancel'. Once dispatched, you'll need to refuse delivery or raise a return request after receiving it.",
+    "category": "orders",
+    "tags": ["cancel", "cancellation", "order", "stop"]
+  },
+  {
+    "id": "cc_012",
+    "question": "How do I reset my account password?",
+    "answer": "Click 'Forgot Password' on the login page. Enter your registered email or phone, and you'll receive an OTP. Enter the OTP and set a new password. Takes less than 2 minutes.",
+    "category": "account",
+    "tags": ["password", "reset", "forgot", "login", "account"]
+  },
+  {
+    "id": "cc_013",
+    "question": "How do I update my delivery address?",
+    "answer": "Log in to your account → 'My Profile' → 'Addresses' → 'Add or Edit Address'. For an existing order that hasn't been dispatched, contact us immediately to update the address.",
+    "category": "account",
+    "tags": ["address", "update", "change", "delivery address", "edit"]
+  },
+  {
+    "id": "cc_014",
+    "question": "Where are your stores located?",
+    "answer": "We have stores in Bengaluru (3 locations), Mumbai (2 locations), Delhi, Hyderabad, and Chennai. Use the 'Store Locator' on our website to find the nearest store with hours and address.",
+    "category": "stores",
+    "tags": ["store", "location", "offline", "visit", "address"]
+  },
+  {
+    "id": "cc_015",
+    "question": "How do I contact a human support agent?",
+    "answer": "You can reach our human agents via phone at 1800-123-4567 (toll-free, 9 AM - 9 PM) or request an escalation in this chat. Average wait time is 3-5 minutes.",
+    "category": "escalation",
+    "tags": ["human", "agent", "speak", "call", "escalate", "manager"]
+  },
+  {
+    "id": "cc_016",
+    "question": "How do I apply a coupon or promo code?",
+    "answer": "During checkout, look for the 'Apply Coupon' box and enter your promo code. The discount will be applied to eligible items. One coupon per order. Not valid with other offers.",
+    "category": "offers",
+    "tags": ["coupon", "promo code", "discount", "offer", "apply"]
+  },
+  {
+    "id": "cc_017",
+    "question": "Why was my payment declined?",
+    "answer": "Payments can be declined due to incorrect card details, insufficient funds, bank block on online transactions, or VPA issues. Please try a different payment method or contact your bank.",
+    "category": "payment",
+    "tags": ["payment failed", "declined", "error", "not going through"]
+  },
+  {
+    "id": "cc_018",
+    "question": "How do I subscribe to or cancel a subscription?",
+    "answer": "Go to 'My Account' → 'Subscriptions' to view, modify, or cancel your active subscriptions. Cancellations take effect at the end of the current billing cycle.",
+    "category": "subscription",
+    "tags": ["subscription", "cancel plan", "monthly", "renew", "billing"]
+  },
+  {
+    "id": "cc_019",
+    "question": "I was charged twice for an order. What do I do?",
+    "answer": "Double charges usually auto-reverse within 24-48 hours. If not, please share the transaction IDs and we'll resolve it within 3 business days with a full refund of the duplicate charge.",
+    "category": "billing",
+    "tags": ["charged twice", "double charge", "billing error", "extra deducted"]
+  },
+  {
+    "id": "cc_020",
+    "question": "How do I avail EMI on my purchase?",
+    "answer": "EMI is available on purchases above ₹3000 using credit cards from SBI, HDFC, ICICI, Axis, and Kotak. Select 'Pay via EMI' at checkout and choose your preferred tenure (3, 6, 9, or 12 months).",
+    "category": "payment",
+    "tags": ["EMI", "installment", "credit card", "monthly payment"]
+  },
+  {
+    "id": "cc_021",
+    "question": "What is your exchange policy?",
+    "answer": "We offer exchange on electronics and appliances within 10 days if the product is defective. Fashion items can be exchanged for a different size within 15 days. Same conditions as returns apply.",
+    "category": "exchange",
+    "tags": ["exchange", "swap", "replace", "different size", "defective"]
+  },
+  {
+    "id": "cc_022",
+    "question": "Why is my order delayed?",
+    "answer": "Delays can be due to high demand, courier issues, weather disruptions, or address verification. You can check the live tracking link in your order confirmation SMS for real-time updates.",
+    "category": "delivery",
+    "tags": ["delayed", "late delivery", "order delay", "not arrived"]
+  },
+  {
+    "id": "cc_023",
+    "question": "How do I get an invoice for my order?",
+    "answer": "Your invoice is automatically emailed to your registered email after order placement. You can also download it from 'My Orders' → select order → 'Download Invoice'.",
+    "category": "invoice",
+    "tags": ["invoice", "bill", "receipt", "GST", "tax invoice"]
+  },
+  {
+    "id": "cc_024",
+    "question": "Can I change my order after placing it?",
+    "answer": "Orders can be modified (size, color, quantity) within 30 minutes of placing, if not yet processed. After that, you'll need to cancel and re-order. Call us immediately at 1800-123-4567.",
+    "category": "orders",
+    "tags": ["modify order", "change order", "edit", "update order"]
+  },
+  {
+    "id": "cc_025",
+    "question": "How do I access technical support for a product?",
+    "answer": "For technical support, go to our website → 'Support' → 'Technical Help'. You can also chat with a technical expert (9 AM - 9 PM), raise a ticket, or call 1800-123-4567 (option 2).",
+    "category": "technical",
+    "tags": ["technical support", "not working", "setup help", "troubleshoot"]
+  }
+]

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "faq_001",
+    "question": "What are your working hours?",
+    "answer": "We are open Monday to Saturday, 9 AM to 7 PM. We are closed on Sundays and public holidays. For emergencies, please call our helpline.",
+    "category": "hours",
+    "tags": ["hours", "timing", "open", "close", "working hours"]
+  },
+  {
+    "id": "faq_002",
+    "question": "Are you open on Sundays?",
+    "answer": "We are closed on Sundays. Our working hours are Monday to Saturday, 9 AM to 7 PM. We recommend booking appointments in advance to avoid waiting.",
+    "category": "hours",
+    "tags": ["sunday", "weekend", "open", "closed"]
+  },
+  {
+    "id": "faq_003",
+    "question": "Which doctors are available?",
+    "answer": "We have Dr. Priya Nair (General Physician), Dr. Arjun Mehta (Cardiologist), Dr. Sunita Rao (Gynaecologist), and Dr. Ramesh Kumar (Orthopaedic). Availability varies by day.",
+    "category": "doctors",
+    "tags": ["doctors", "specialists", "physician", "available"]
+  },
+  {
+    "id": "faq_004",
+    "question": "How do I book an appointment?",
+    "answer": "You can book an appointment right here by telling me your name, preferred date and time, and the doctor you wish to see. I will confirm your slot immediately.",
+    "category": "booking",
+    "tags": ["book", "appointment", "schedule", "reserve"]
+  },
+  {
+    "id": "faq_005",
+    "question": "Can I reschedule my appointment?",
+    "answer": "Yes, you can reschedule your appointment. Please contact us at least 2 hours before your scheduled time. Just tell me your name and preferred new slot and I will update it.",
+    "category": "booking",
+    "tags": ["reschedule", "change", "appointment", "cancel"]
+  },
+  {
+    "id": "faq_006",
+    "question": "What are the consultation fees?",
+    "answer": "General consultation is ₹400 for new patients and ₹300 for follow-up visits. Specialist consultations range from ₹600 to ₹1200 depending on the doctor.",
+    "category": "fees",
+    "tags": ["fees", "cost", "charges", "price", "consultation"]
+  },
+  {
+    "id": "faq_007",
+    "question": "Do you accept health insurance?",
+    "answer": "Yes, we accept most major health insurance policies including Star Health, HDFC Ergo, and Mediclaim. Please carry your insurance card and ID proof when visiting.",
+    "category": "insurance",
+    "tags": ["insurance", "mediclaim", "cashless", "health card"]
+  },
+  {
+    "id": "faq_008",
+    "question": "Where are you located?",
+    "answer": "We are located at 42, MG Road, Bengaluru — near the Metro Station, behind HDFC Bank. We have ample parking available. Google Maps link available on request.",
+    "category": "location",
+    "tags": ["location", "address", "directions", "where", "map"]
+  },
+  {
+    "id": "faq_009",
+    "question": "How long is the waiting time?",
+    "answer": "With a prior appointment, waiting time is usually 10-15 minutes. Walk-in patients may wait 30-60 minutes depending on the day. We recommend booking in advance.",
+    "category": "booking",
+    "tags": ["waiting", "queue", "time", "walk-in"]
+  },
+  {
+    "id": "faq_010",
+    "question": "Is there an emergency facility?",
+    "answer": "We have a first-aid and basic emergency facility. For serious emergencies, we will stabilise you and refer to the nearest hospital. Our emergency number is 080-12345678.",
+    "category": "emergency",
+    "tags": ["emergency", "urgent", "critical", "ambulance"]
+  },
+  {
+    "id": "faq_011",
+    "question": "What documents should I bring for my first visit?",
+    "answer": "For your first visit, please bring a valid photo ID (Aadhaar/PAN), your insurance card if applicable, and any previous medical reports or prescriptions.",
+    "category": "documentation",
+    "tags": ["documents", "ID", "first visit", "bring", "records"]
+  },
+  {
+    "id": "faq_012",
+    "question": "Do you offer online consultations?",
+    "answer": "Yes, we offer video consultations for follow-up visits and non-emergency queries. Online consultation fees are ₹250. Book the same way as an in-person appointment.",
+    "category": "online",
+    "tags": ["online", "video", "teleconsultation", "virtual", "remote"]
+  },
+  {
+    "id": "faq_013",
+    "question": "What services does the clinic offer?",
+    "answer": "We offer general medicine, cardiology, gynaecology, orthopaedics, pathology lab (blood tests), ECG, X-ray, and pharmacy. All under one roof for your convenience.",
+    "category": "services",
+    "tags": ["services", "facilities", "available", "lab", "tests"]
+  },
+  {
+    "id": "faq_014",
+    "question": "How do I cancel an appointment?",
+    "answer": "To cancel, please inform us at least 2 hours in advance so we can offer your slot to another patient. Just message me your name and appointment time to cancel.",
+    "category": "booking",
+    "tags": ["cancel", "cancellation", "appointment"]
+  },
+  {
+    "id": "faq_015",
+    "question": "Is there a pharmacy at the clinic?",
+    "answer": "Yes, we have an in-house pharmacy stocked with common medicines. Our pharmacy is open 9 AM to 8 PM, Monday to Saturday. We also accept prescriptions from outside.",
+    "category": "pharmacy",
+    "tags": ["pharmacy", "medicines", "drugs", "chemist"]
+  },
+  {
+    "id": "faq_016",
+    "question": "Do you have facilities for children?",
+    "answer": "Yes, we have a paediatric OPD every Tuesday and Thursday with Dr. Kavita Nambiar. We also have a child-friendly waiting area with toys and books.",
+    "category": "paediatrics",
+    "tags": ["children", "kids", "paediatrics", "child doctor"]
+  },
+  {
+    "id": "faq_017",
+    "question": "What are the blood test facilities available?",
+    "answer": "Our in-house pathology lab offers complete blood count, sugar levels, lipid profile, thyroid tests, urine tests, and more. Reports are available within 4-6 hours for most tests.",
+    "category": "lab",
+    "tags": ["blood test", "pathology", "lab", "reports", "CBC"]
+  },
+  {
+    "id": "faq_018",
+    "question": "Is parking available?",
+    "answer": "Yes, we have free parking for up to 50 cars and secure 2-wheeler parking in our basement. Parking is free for the first 2 hours for clinic patients.",
+    "category": "parking",
+    "tags": ["parking", "car", "two-wheeler", "bike", "park"]
+  },
+  {
+    "id": "faq_019",
+    "question": "Do you provide home visit services?",
+    "answer": "Yes, we offer home visits for elderly patients and post-surgery care within a 5 km radius. Home visit charges are ₹800 per visit. Please call to schedule.",
+    "category": "home visit",
+    "tags": ["home visit", "house call", "elderly", "home care"]
+  },
+  {
+    "id": "faq_020",
+    "question": "What are the payment methods accepted?",
+    "answer": "We accept cash, UPI (PhonePe, GPay, Paytm), all major credit and debit cards, and net banking. We do not accept cheques.",
+    "category": "payment",
+    "tags": ["payment", "UPI", "cash", "card", "online payment"]
+  },
+  {
+    "id": "faq_021",
+    "question": "How do I get my reports?",
+    "answer": "Lab reports can be collected from our reception or sent to you via WhatsApp or email. Please share your contact details when collecting samples.",
+    "category": "reports",
+    "tags": ["reports", "results", "collect", "WhatsApp", "email"]
+  },
+  {
+    "id": "faq_022",
+    "question": "Do you have a senior citizen discount?",
+    "answer": "Yes, we offer 15% discount on consultation fees for senior citizens (60 years and above). Please carry age proof at the time of visit.",
+    "category": "discounts",
+    "tags": ["senior", "elderly", "discount", "concession", "60 years"]
+  },
+  {
+    "id": "faq_023",
+    "question": "Is there a waiting area with air conditioning?",
+    "answer": "Yes, our clinic has a fully air-conditioned waiting area with comfortable seating, water dispenser, and TV. We also have a separate waiting area for contagious patients.",
+    "category": "facilities",
+    "tags": ["AC", "air conditioning", "waiting", "comfortable", "amenities"]
+  },
+  {
+    "id": "faq_024",
+    "question": "Can I speak to a doctor on the phone?",
+    "answer": "For quick queries, our doctors offer 10-minute phone consultations for ₹150. For detailed consultations, we recommend an in-person or video appointment.",
+    "category": "consultation",
+    "tags": ["phone", "call", "doctor", "teleconsultation", "quick query"]
+  },
+  {
+    "id": "faq_025",
+    "question": "What should I do in case of a medical emergency?",
+    "answer": "For life-threatening emergencies, call 108 (national ambulance) immediately. Our clinic first-aid number is 080-12345678. Do not drive yourself — call for help first.",
+    "category": "emergency",
+    "tags": ["emergency", "ambulance", "108", "urgent", "life-threatening"]
+  }
+]
