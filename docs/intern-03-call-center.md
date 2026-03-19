@@ -4,12 +4,12 @@
 ---
 
 **Project Title:** AI-Powered Call Center Agent Bot on Telegram
-**Intern Name:** [INTERN NAME]
-**College Roll Number:** [ROLL NUMBER]
-**College / Institution:** [COLLEGE NAME]
+**Intern Name:** Harshitha V Shetty 
+**College Roll Number:** 24251416
+**College / Institution:** St. Aloysius (Deemed-to-be University)
 **Guide / Supervisor:** [GUIDE NAME]
 **Academic Year:** 2025–26
-**Submission Date:** [SUBMISSION DATE]
+**Submission Date:** 26-03-2026
 
 ---
 
