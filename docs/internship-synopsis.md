@@ -19,15 +19,7 @@ This internship programme engaged four interns, each owning an independent but a
 
 ## Shared Technology Stack
 
-| Component | Technology | Purpose |
-|-----------|-----------|---------|
-| Messaging platform | Telegram Bot API | User-facing interface |
-| Bot framework | python-telegram-bot 21.x | Telegram polling & handlers |
-| LLM inference | Groq API — LLaMA-3.3-70B-Versatile | Natural language understanding & generation |
-| Vector database | Pinecone (serverless, llama-text-embed-v2) | Semantic FAQ retrieval (RAG) |
-| Relational database | Supabase (PostgreSQL) | Persistent storage & audit logs |
-| Runtime | Python 3.11+ | All bot implementations |
-| IDE | Firebase Studio / Google IDX | Cloud-hosted development environment |
+All four bots are built on a common free-tier stack. The Telegram Bot API serves as the user-facing interface, accessed via the python-telegram-bot 21.x library running in polling mode. Natural language understanding and response generation is handled by the Groq API using the LLaMA-3.3-70B-Versatile model. Three of the four verticals use Pinecone (serverless, llama-text-embed-v2 embeddings) for semantic FAQ retrieval. All bots persist data to Supabase (PostgreSQL) for conversation logging and transaction records. The runtime is Python 3.11+ and development was done on Firebase Studio / Google IDX, a cloud-hosted IDE requiring no local setup.
 
 ---
 
@@ -66,17 +58,14 @@ An AI personal secretary that manages inbound Telegram messages on behalf of a p
 
 ### Technical Highlights
 
-- **Per-contact instruction storage:** `pa_instructions` table in Supabase with soft-delete pattern (`is_active` flag)
-- **Fuzzy name matching:** `ilike` query against contact names to handle username variations
-- **Dual prompt design:** separate `SECRETARY_SYSTEM_PROMPT` (for contacts) and `OWNER_SYSTEM_PROMPT` (for owner queries)
-- **No Pinecone:** knowledge is stored in structured Supabase instructions, not a vector index
+- **Per-contact instruction storage:** Owner-defined instructions are stored in Supabase with a soft-delete pattern using an `is_active` flag, preserving history while allowing updates.
+- **Fuzzy name matching:** Contact lookup uses a case-insensitive partial match query to handle username variations reliably.
+- **Dual prompt design:** Separate system prompts are used for contacts (secretary mode) and the owner (query mode), keeping behaviour clearly separated.
+- **No vector database:** Unlike the other verticals, this bot stores knowledge as structured Supabase records rather than a Pinecone vector index, which is appropriate for the instruction-based use case.
 
-### Database Tables
+### Database
 
-| Table | Purpose |
-|-------|---------|
-| `pa_instructions` | Owner-defined per-contact handling rules |
-| `conversations` | Full message log (filtered by `bot_id = 'personal_agent'`) |
+Two Supabase tables are used. The `pa_instructions` table holds owner-defined per-contact handling rules with an active/inactive flag. The `conversations` table serves as a full message log, filtered by `bot_id = 'personal_agent'` to separate it from the other verticals.
 
 ### Outcome
 
@@ -98,21 +87,18 @@ A 24/7 AI front-desk receptionist for a clinic (or any service business). Patien
 - Semantic FAQ answering using Pinecone RAG (top-3 clinic-specific chunks per query)
 - Escalation detection for complex or frustrated patient queries
 - Instant `/start` greeting without an LLM call
-- Appointments persisted to dedicated Supabase table for staff access
+- Appointments persisted to a dedicated Supabase table for staff access
 
 ### Technical Highlights
 
-- **RAG pipeline:** Pinecone namespace `biz_intern_receptionist` with clinic FAQ (fees, hours, specialties, insurance)
-- **Structured appointment extraction:** LLM outputs `action_data` with `patient_name`, `phone`, `appointment_datetime`, `doctor` when all details are collected
-- **Free-text date storage:** `appointment_datetime` stored as text to accommodate varied patient input formats ("next Monday afternoon")
-- **Empathetic tone:** Indian English style (kindly, do the needful) prompted explicitly
+- **RAG pipeline:** A Pinecone namespace populated with clinic FAQ content (fees, hours, specialties, insurance) is searched before every LLM call, grounding responses in verified clinic information and reducing hallucination.
+- **Structured appointment extraction:** The LLM is prompted to output structured appointment data only when all required fields (patient name, phone, date/time, doctor) have been collected across the conversation.
+- **Free-text date storage:** Appointment datetime is stored as plain text to accommodate varied patient input formats such as "next Monday afternoon", with normalisation planned for Phase 2.
+- **Empathetic tone:** Indian English style ("kindly", "do the needful") is prompted explicitly to match the target user base.
 
-### Database Tables
+### Database
 
-| Table | Purpose |
-|-------|---------|
-| `appointments` | Confirmed appointment records |
-| `conversations` | Conversation log (filtered by `bot_id = 'receptionist'`) |
+The `appointments` table stores confirmed booking records including patient name, phone, requested datetime, and preferred doctor. The shared `conversations` table logs all exchanges filtered by `bot_id = 'receptionist'`.
 
 ### Outcome
 
@@ -130,24 +116,22 @@ An AI tier-1 customer support agent for a retail/e-commerce business (demonstrat
 
 ### Key Features
 
-- Intent classification across 7 categories: `faq`, `complaint`, `refund`, `escalate`, `track_order`, `account`, `greeting`
-- Complaint logging with structured metadata: complaint type, description, and urgency rating (`low`/`medium`/`high`)
-- Escalation engine: detects angry language and triggers human-agent escalation with a reference number
-- Semantic FAQ retrieval via Pinecone (return/refund policy, shipping, warranty, payment methods)
-- Empathy-first response pattern: frustration acknowledged before solutions are offered
+- Intent classification across 7 categories: FAQ, complaint, refund, escalation, order tracking, account, and greeting
+- Complaint logging with structured metadata including complaint type, description, and urgency rating (low / medium / high)
+- Escalation engine that detects angry language and triggers human-agent handoff with a reference number
+- Semantic FAQ retrieval via Pinecone (return/refund policy, shipping timelines, warranty, payment methods)
+- Empathy-first response pattern where frustration is acknowledged before solutions are offered
 
 ### Technical Highlights
 
-- **Empathy instruction:** system prompt explicitly instructs the LLM to acknowledge frustration before providing solutions — measurably improved tone in testing
-- **Urgency scoring:** complaint metadata includes urgency level, enabling dashboard filtering and SLA prioritisation
-- **Complaint metadata in `action_taken`:** JSON-encoded complaint data stored in the shared `conversations` table, avoiding a separate table at this prototype stage
-- **Reference number generation:** last 6 digits of `telegram_user_id` used as a per-customer reference
+- **Empathy instruction:** The system prompt explicitly instructs the LLM to acknowledge frustration before providing solutions. This produced a measurably better customer tone compared to an earlier version without it.
+- **Urgency scoring:** Every complaint is classified as low, medium, or high urgency — enabling dashboard filtering and future SLA-based prioritisation.
+- **Complaint metadata storage:** Structured complaint data (type, description, urgency) is JSON-encoded and stored in the shared `conversations` table's `action_taken` column, avoiding a separate table at prototype stage.
+- **Reference number generation:** A per-customer reference is derived from the last 6 digits of their Telegram user ID, giving a lightweight ticket identifier without a dedicated ticketing system.
 
-### Database Tables
+### Database
 
-| Table | Purpose |
-|-------|---------|
-| `conversations` | Full log with complaint metadata in `action_taken` column (filtered by `bot_id = 'call_center'`) |
+All conversation and complaint data is stored in the shared `conversations` table filtered by `bot_id = 'call_center'`. Complaint metadata is embedded as JSON in the `action_taken` column. A dedicated `support_tickets` table with status tracking is planned for Phase 2.
 
 ### Outcome
 
@@ -161,30 +145,26 @@ The bot handled all tier-1 support scenarios reliably. The empathy-first instruc
 
 ### What It Does
 
-A dual-mode AI concierge for a hotel and restaurant (demonstrated as "Grand Mahal Hotel"). Within a single conversational interface, guests can book rooms, place food/room-service orders, and ask hotel FAQs. The bot switches seamlessly between both modes based on conversation context.
+A dual-mode AI concierge for a hotel and restaurant (demonstrated as "Grand Mahal Hotel"). Within a single conversational interface, guests can book rooms, place food or room-service orders, and ask hotel FAQs. The bot switches seamlessly between both modes based on conversation context.
 
 ### Key Features
 
-- **Room booking:** collects guest name, room type (Standard/Deluxe/Suite), check-in/check-out dates, guest count; calculates total amount
-- **Food ordering:** accepts multi-item orders from a full restaurant menu with automatic total calculation
-- **Dual-mode intent switching:** context switches between `room_booking` and `food_order` within the same session
-- **Prompt-injected catalogue:** full menu and room rate table embedded in every LLM prompt for accurate pricing without extra DB queries
-- **Hotel FAQ:** Pinecone RAG for check-in/check-out policies, amenities, directions, etc.
+- Room booking that collects guest name, room type (Standard / Deluxe / Suite), check-in and check-out dates, and guest count, with automatic total amount calculation
+- Food ordering that accepts multi-item orders from a full restaurant menu with automatic total calculation
+- Dual-mode intent switching between room booking and food order within the same session
+- Full menu and room rate catalogue embedded directly in the LLM prompt for accurate pricing without extra database queries
+- Hotel FAQ answering via Pinecone for check-in/check-out policies, amenities, and directions
 
 ### Technical Highlights
 
-- **Prompt-injected catalogue approach:** room rates and menu defined as module-level string constants (`ROOM_RATES`, `MENU`) and injected into every system prompt — eliminates a DB round-trip, enables LLM to compute totals directly
-- **JSONB for food orders:** `items` column in `food_orders` stores array of `{name, qty, price}` objects natively in PostgreSQL JSONB
-- **Typed date columns for bookings:** `check_in` / `check_out` stored as PostgreSQL `date` type (LLM prompted for `YYYY-MM-DD` format), enabling date arithmetic
-- **Warm hospitality tone:** Indian hospitality phrases ("With pleasure", "Most certainly", "Namaste") prompted explicitly
+- **Prompt-injected catalogue:** Room rates and the restaurant menu are defined as module-level string constants and injected into every LLM system prompt. This eliminates a database round-trip and allows the LLM to compute totals directly from the prompt context.
+- **JSONB for food orders:** The food orders table stores order items as a PostgreSQL JSONB array of objects (name, quantity, price), allowing flexible multi-item orders without a normalised order-items table.
+- **Typed date columns for bookings:** Check-in and check-out are stored as typed PostgreSQL date columns (the LLM is prompted for YYYY-MM-DD format), enabling date arithmetic for stay duration and total calculation.
+- **Warm hospitality tone:** Indian hospitality phrases ("With pleasure", "Most certainly", "Namaste") are prompted explicitly to match the hotel context.
 
-### Database Tables
+### Database
 
-| Table | Purpose |
-|-------|---------|
-| `hotel_bookings` | Room booking records with typed date columns and pre-calculated total |
-| `food_orders` | Food orders with JSONB items array and order status |
-| `conversations` | Conversation log (filtered by `bot_id = 'hotel'`) |
+Two dedicated tables are used. The `hotel_bookings` table stores room booking records with typed date columns and a pre-calculated total amount. The `food_orders` table stores orders with a JSONB items array and an order status field (`pending` / `preparing` / `delivered`). The shared `conversations` table logs all exchanges filtered by `bot_id = 'hotel'`.
 
 ### Outcome
 
@@ -196,37 +176,25 @@ Multi-night booking totals and multi-item food order totals were calculated accu
 
 ### Admin Dashboard
 
-A real-time HTML dashboard subscribes to the Supabase `conversations` table and displays live message feeds across all four bot verticals. Each bot's conversations are filtered by `bot_id`.
+A real-time HTML dashboard subscribes to the Supabase `conversations` table and displays live message feeds across all four bot verticals. Each bot's conversations are separated by the `bot_id` field, allowing staff to monitor all agents from a single view.
 
-### Shared `conversations` Table Schema
+### Shared Conversations Log
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `id` | uuid | Primary key |
-| `bot_id` | text | Identifies the vertical (`personal_agent`, `receptionist`, `call_center`, `hotel`) |
-| `telegram_user_id` | text | Sender's Telegram user ID |
-| `telegram_username` | text | Sender's Telegram username |
-| `user_message` | text | Raw user message |
-| `bot_response` | text | Bot's reply |
-| `intent` | text | Classified intent from LLM |
-| `action_taken` | text | Action taken (or JSON-encoded metadata) |
-| `created_at` | timestamptz | Auto-set on insert |
+All four bots write to a single `conversations` table in Supabase, distinguished by the `bot_id` column. Each record captures the bot identifier, the user's Telegram ID and username, the user's raw message, the bot's response, the classified intent, any action taken (or JSON-encoded metadata), and a creation timestamp. This unified log powers the admin dashboard and enables cross-vertical analytics.
 
 ---
 
 ## Learning Outcomes
 
-All four interns gained practical experience in the following areas:
+All four interns gained practical experience across the following skill areas during the internship:
 
-| Skill Area | What Was Practised |
-|------------|--------------------|
-| LLM Integration | Calling Groq API, enforcing JSON output, handling rate limits and fallbacks |
-| Prompt Engineering | System prompt design, structured output, tone control, multi-turn context |
-| Vector Databases | Populating Pinecone namespaces, semantic search, RAG pipeline |
-| Database Design | Supabase table design, soft-delete patterns, JSONB, typed columns |
-| Telegram Bot Development | python-telegram-bot library, polling mode, command & message handlers |
-| Conversational UX | Multi-turn state management, graceful escalation, error handling |
-| Python | async/await, environment variable management, JSON parsing |
+- **LLM Integration** — calling the Groq API, enforcing structured JSON output, handling rate limits and fallback scenarios
+- **Prompt Engineering** — designing system prompts for tone control, structured output, intent classification, and multi-turn context management
+- **Vector Databases** — populating Pinecone namespaces with domain-specific content, running semantic similarity searches, and building a RAG pipeline
+- **Database Design** — Supabase table design, soft-delete patterns, JSONB columns, and typed date fields
+- **Telegram Bot Development** — using the python-telegram-bot library, managing polling mode, and writing command and message handlers
+- **Conversational UX** — multi-turn state management, graceful escalation design, and error handling
+- **Python** — async/await programming, environment variable management, and JSON parsing
 
 ---
 
