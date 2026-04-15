@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentDesk — Intern AI Showcase</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e8e8;
+      font-family: ui-monospace, "JetBrains Mono", Consolas, monospace;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      border-bottom: 1px solid #1a1a1a;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: #0a0a0a;
+      z-index: 10;
+    }
+    .nav-left { display: flex; align-items: center; gap: 10px; }
+    .nav-logo { color: #fff; font-size: 16px; letter-spacing: -0.5px; }
+    .nav-sep  { color: #2a2a2a; }
+    .nav-sub  { color: #444; font-size: 13px; }
+    .nav-status { display: flex; align-items: center; gap: 6px; color: #444; font-size: 12px; }
+    .dot-live { width: 7px; height: 7px; border-radius: 50%; background: #2a6a2a; display: inline-block; }
+
+    /* ── Tab bar ── */
+    .tabbar {
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: #555;
+      font-family: inherit;
+      font-size: 13px;
+      padding: 12px 16px;
+      cursor: pointer;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover  { color: #999; }
+    .tab-btn.active { color: #e8e8e8; border-bottom-color: #e8e8e8; }
+
+    /* ── Context bar ── */
+    .context-bar {
+      border-bottom: 1px solid #111;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+    .context-left { display: flex; gap: 12px; color: #444; }
+    .context-right { color: #2a2a2a; }
+
+    /* ── Content ── */
+    .content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ── Stat cards ── */
+    .stats-row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stats-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .stats-row.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .stat-card {
+      border: 1px solid #1f1f1f;
+      background: #111;
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .stat-label { color: #444; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+    .stat-value { color: #e8e8e8; font-size: 28px; font-weight: 500; }
+    .stat-sub   { color: #333; font-size: 11px; margin-top: 4px; }
+
+    /* ── Grid layout ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* ── Section label ── */
+    .section-label {
+      color: #444;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    /* ── Instruction cards ── */
+    .card-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .instr-card {
+      border: 1px solid #1a1a1a;
+      background: #0e0e0e;
+      border-radius: 6px;
+      padding: 14px;
+    }
+    .instr-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .instr-name { color: #e8e8e8; font-size: 13px; }
+    .badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+    .badge.active   { border-color: #2a4a2a; color: #4a9a4a; background: #0d1f0d; }
+    .badge.inactive { border-color: #3a2a2a; color: #7a4a4a; background: #1a0d0d; }
+    .instr-text { color: #555; font-size: 12px; line-height: 1.5; }
+
+    /* ── Conversation log ── */
+    .conv-card {
+      border: 1px solid #1a1a1a;
+      background: #0e0e0e;
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 8px;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .conv-card-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .conv-user { color: #555; font-size: 11px; }
+    .conv-time { color: #333; font-size: 11px; }
+    .conv-msg  { font-size: 12px; line-height: 1.55; margin-bottom: 4px; }
+    .conv-msg .arrow { color: #444; }
+    .conv-msg.user-msg { color: #777; }
+    .conv-msg.bot-msg  { color: #e8e8e8; }
+
+    /* ── Table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+    .data-table thead tr {
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 10px 12px;
+      color: #444;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+    }
+    .data-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #111;
+      vertical-align: top;
+    }
+    .data-table tr:hover td { background: #0d0d0d; }
+    .td-primary { color: #e8e8e8; }
+    .td-muted   { color: #666; }
+    .td-dim     { color: #888; }
+
+    /* ── Urgency badges ── */
+    .urgency {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+    .urgency.high   { border-color: #4a1a1a; color: #cc5555; background: #1f0a0a; }
+    .urgency.medium { border-color: #4a3a1a; color: #cc9944; background: #1f1a0a; }
+    .urgency.low    { border-color: #1a3a1a; color: #44aa44; background: #0a1f0a; }
+
+    /* ── Booking type badge ── */
+    .booking-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid #2a2a4a;
+      color: #6699cc;
+      background: #0a0a1f;
+    }
+
+    /* ── Complaint feed ── */
+    .complaint-card {
+      border: 1px solid #1a1a1a;
+      background: #0e0e0e;
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 8px;
+    }
+    .complaint-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .complaint-type { color: #888; font-size: 11px; text-transform: capitalize; }
+    .complaint-desc { color: #555; font-size: 12px; line-height: 1.5; }
+
+    /* ── Activity card ── */
+    .activity-card {
+      border: 1px solid #1a1a1a;
+      background: #0e0e0e;
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 8px;
+    }
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .activity-user { color: #888; font-size: 11px; }
+
+    /* ── Empty ── */
+    .empty { text-align: center; padding: 32px; color: #333; font-size: 13px; }
+
+    /* ── Tab panels ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+      .stats-row.cols-3 { grid-template-columns: 1fr; }
+      .stats-row.cols-2 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<header class="nav">
+  <div class="nav-left">
+    <span class="nav-logo">AgentDesk</span>
+    <span class="nav-sep">/</span>
+    <span class="nav-sub">Intern Showcase · 2025–26</span>
+  </div>
+  <div class="nav-status">
+    <span class="dot-live"></span>
+    4 agents · mock data
+  </div>
+</header>
+
+<!-- Tab bar -->
+<nav class="tabbar">
+  <button class="tab-btn active" data-tab="secretary">Personal Secretary</button>
+  <button class="tab-btn" data-tab="receptionist">Receptionist</button>
+  <button class="tab-btn" data-tab="callcenter">Call Center</button>
+  <button class="tab-btn" data-tab="concierge">Concierge</button>
+</nav>
+
+<!-- Context bar -->
+<div class="context-bar" id="context-bar">
+  <div class="context-left">
+    <span id="ctx-intern">Intern 1</span>
+    <span>·</span>
+    <span id="ctx-domain">Personal AI Secretary — manages contacts &amp; message routing</span>
+  </div>
+  <span class="context-right">bot_id: <span id="ctx-botid">personal_agent</span></span>
+</div>
+
+<!-- Content -->
+<main class="content">
+
+  <!-- ── TAB 1: Secretary ── -->
+  <div class="tab-panel active" id="tab-secretary">
+    <div class="two-col">
+      <!-- Left: Instructions -->
+      <div>
+        <p class="section-label">Contact Instructions</p>
+        <div class="card-list" id="instr-list"></div>
+      </div>
+      <!-- Right: Conversations -->
+      <div>
+        <p class="section-label">Conversation Log</p>
+        <div id="conv-secretary"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 2: Receptionist ── -->
+  <div class="tab-panel" id="tab-receptionist">
+    <div class="stats-row cols-3" id="stats-receptionist"></div>
+    <p class="section-label">Appointments</p>
+    <table class="data-table" id="appt-table">
+      <thead>
+        <tr>
+          <th>Patient</th><th>Phone</th><th>Date / Time</th><th>Doctor</th>
+        </tr>
+      </thead>
+      <tbody id="appt-body"></tbody>
+    </table>
+    <p class="section-label">Conversation Log</p>
+    <div id="conv-receptionist"></div>
+  </div>
+
+  <!-- ── TAB 3: Call Center ── -->
+  <div class="tab-panel" id="tab-callcenter">
+    <div class="stats-row cols-3" id="stats-callcenter"></div>
+    <p class="section-label">Complaint Feed</p>
+    <div id="complaint-feed"></div>
+    <p class="section-label" style="margin-top:24px;">Conversation Log</p>
+    <div id="conv-callcenter"></div>
+  </div>
+
+  <!-- ── TAB 4: Concierge ── -->
+  <div class="tab-panel" id="tab-concierge">
+    <div class="stats-row cols-2" id="stats-concierge"></div>
+    <p class="section-label">Recent Activity</p>
+    <div id="activity-feed"></div>
+  </div>
+
+</main>
+
+<script>
+// ── Mock Data ────────────────────────────────────────────────────────────────
+
+const INSTRUCTIONS = [
+  { id:1, contact_name:"Ravi Kumar",   instruction:"Always respond politely, schedule callback if urgent", is_active:true },
+  { id:2, contact_name:"Priya Sharma", instruction:"VIP client — escalate immediately",                   is_active:true },
+  { id:3, contact_name:"Arjun Nair",   instruction:"Do not relay unless marked urgent",                   is_active:false },
+  { id:4, contact_name:"Deepa Menon",  instruction:"Only relay between 9am–6pm",                          is_active:true },
+];
+
+const APPOINTMENTS = [
+  { id:1, patient_name:"Sneha Rao",    phone:"9876543210", requested_datetime:"16 Apr, 10:30 AM", preferred_doctor:"Dr. Mehta",  created_at:"2026-04-15T04:10:00Z" },
+  { id:2, patient_name:"Kiran Bhat",   phone:"9845123456", requested_datetime:"17 Apr, 02:00 PM", preferred_doctor:"Dr. Sinha",  created_at:"2026-04-15T03:45:00Z" },
+  { id:3, patient_name:"Anita Dsouza", phone:"9731234567", requested_datetime:"Next Monday PM",   preferred_doctor:"Any available", created_at:"2026-04-15T02:00:00Z" },
+];
+
+const CONVERSATIONS = [
+  // Secretary
+  { id:"s1", bot_id:"personal_agent", user_id:"ravi_kumar",
+    user_message:"Hi, I need to speak with the owner urgently.",
+    bot_response:"Hello Ravi, I'm the personal assistant. The owner is unavailable. I'll log this as urgent and ensure they get back to you shortly.",
+    action_taken:{ action:"relay", urgency:"high" }, created_at:"2026-04-15T05:12:00Z" },
+  { id:"s2", bot_id:"personal_agent", user_id:"deepa_menon",
+    user_message:"Can we reschedule the Monday call?",
+    bot_response:"Of course, Deepa. I'll note your request and inform the owner. You'll receive a confirmation shortly.",
+    action_taken:{ action:"schedule" }, created_at:"2026-04-15T04:30:00Z" },
+
+  // Receptionist
+  { id:"r1", bot_id:"receptionist", user_id:"sneha_rao",
+    user_message:"I'd like to book an appointment with Dr. Mehta for tomorrow.",
+    bot_response:"Booked! Your appointment with Dr. Mehta is confirmed for 16 Apr at 10:30 AM. Please arrive 10 minutes early.",
+    action_taken:{ action:"appointment_booked" }, created_at:"2026-04-15T04:10:00Z" },
+  { id:"r2", bot_id:"receptionist", user_id:"user_002",
+    user_message:"What are your clinic hours?",
+    bot_response:"Our clinic is open Monday to Saturday, 9:00 AM to 7:00 PM. Closed on Sundays and public holidays.",
+    action_taken:null, created_at:"2026-04-15T03:50:00Z" },
+  { id:"r3", bot_id:"receptionist", user_id:"user_003",
+    user_message:"I've been waiting 2 hours and no one is helping me!",
+    bot_response:"I sincerely apologise. Escalating to senior staff immediately — someone will assist you within 5 minutes.",
+    action_taken:{ action:"escalate" }, created_at:"2026-04-15T03:20:00Z" },
+
+  // Call Center
+  { id:"c1", bot_id:"call_center", user_id:"user_201",
+    user_message:"My order hasn't arrived in 10 days. This is unacceptable!",
+    bot_response:"I completely understand your frustration. Logged as high urgency. Reference: #476201. Our team contacts you within 24 hours.",
+    action_taken:{ complaint_type:"delayed_delivery", description:"Order not received after 10 days", urgency:"high" }, created_at:"2026-04-15T05:05:00Z" },
+  { id:"c2", bot_id:"call_center", user_id:"user_202",
+    user_message:"Can I return a product I bought last week?",
+    bot_response:"Yes, returns are accepted within 30 days. I've initiated a return request — pickup arranged within 48 hours.",
+    action_taken:{ complaint_type:"refund_request", description:"Return initiated for recent purchase", urgency:"low" }, created_at:"2026-04-15T04:40:00Z" },
+  { id:"c3", bot_id:"call_center", user_id:"user_203",
+    user_message:"I was charged twice for the same order!",
+    bot_response:"I apologise for this error. Flagged for immediate billing review. Reference: #476198. Refund in 5–7 working days.",
+    action_taken:{ complaint_type:"billing_issue", description:"Double charged for order", urgency:"medium" }, created_at:"2026-04-15T04:00:00Z" },
+
+  // Concierge
+  { id:"h1", bot_id:"concierge", user_id:"guest_101",
+    user_message:"I'd like to book a Deluxe room for 2 nights from April 18.",
+    bot_response:"Welcome to Grand Mahal Hotel! Reserved: Deluxe room, 2 nights from 18 April. Breakfast included. Shall I confirm?",
+    action_taken:{ booking_type:"room", room_type:"Deluxe", check_in:"18 Apr", nights:2 }, created_at:"2026-04-15T05:00:00Z" },
+  { id:"h2", bot_id:"concierge", user_id:"guest_102",
+    user_message:"Can I order a club sandwich and fresh lime soda to room 204?",
+    bot_response:"Order placed! 1 Club Sandwich + 1 Fresh Lime Soda to Room 204. Estimated delivery: 20 minutes. Enjoy!",
+    action_taken:{ booking_type:"food_order", items:["Club Sandwich","Fresh Lime Soda"], room:"204" }, created_at:"2026-04-15T04:20:00Z" },
+];
+
+// ── Context map ──────────────────────────────────────────────────────────────
+
+const CTX = {
+  secretary:   { intern:"Intern 1", domain:"Personal AI Secretary — contact routing & message management",      botid:"personal_agent" },
+  receptionist:{ intern:"Intern 2", domain:"Business Receptionist — clinic appointments & FAQ answering",       botid:"receptionist"   },
+  callcenter:  { intern:"Intern 3", domain:"Call Center Agent — complaints, refunds & escalations",             botid:"call_center"    },
+  concierge:   { intern:"Intern 4", domain:"Hotel & Restaurant Concierge — room bookings & room service",       botid:"concierge"      },
+};
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function esc(str) {
+  if (!str) return "";
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function fmt(iso) {
+  const d = new Date(iso);
+  return d.toLocaleString("en-IN",{ day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit", hour12:false });
+}
+
+// ── Render helpers ───────────────────────────────────────────────────────────
+
+function statCard(label, value, sub) {
+  return `<div class="stat-card">
+    <div class="stat-label">${esc(label)}</div>
+    <div class="stat-value">${esc(String(value))}</div>
+    ${sub ? `<div class="stat-sub">${esc(sub)}</div>` : ""}
+  </div>`;
+}
+
+function convCards(botId) {
+  const items = CONVERSATIONS.filter(c => c.bot_id === botId);
+  if (!items.length) return `<div class="empty">No conversations yet.</div>`;
+  return items.map(c => `
+    <div class="conv-card">
+      <div class="conv-card-header">
+        <span class="conv-user">${esc(c.user_id)}</span>
+        <span class="conv-time">${fmt(c.created_at)}</span>
+      </div>
+      <div class="conv-msg user-msg"><span class="arrow">→ </span>${esc(c.user_message)}</div>
+      <div class="conv-msg bot-msg"><span class="arrow">← </span>${esc(c.bot_response)}</div>
+    </div>`).join("");
+}
+
+// ── Tab 1: Secretary ─────────────────────────────────────────────────────────
+
+function renderSecretary() {
+  document.getElementById("instr-list").innerHTML = INSTRUCTIONS.map(i => `
+    <div class="instr-card">
+      <div class="instr-card-header">
+        <span class="instr-name">${esc(i.contact_name)}</span>
+        <span class="badge ${i.is_active ? 'active' : 'inactive'}">${i.is_active ? 'active' : 'inactive'}</span>
+      </div>
+      <div class="instr-text">${esc(i.instruction)}</div>
+    </div>`).join("");
+
+  document.getElementById("conv-secretary").innerHTML = convCards("personal_agent");
+}
+
+// ── Tab 2: Receptionist ──────────────────────────────────────────────────────
+
+function renderReceptionist() {
+  const convos = CONVERSATIONS.filter(c => c.bot_id === "receptionist");
+  const escalations = convos.filter(c => c.action_taken?.action === "escalate");
+  const todayStr = new Date().toDateString();
+  const todayAppts = APPOINTMENTS.filter(a => new Date(a.created_at).toDateString() === todayStr);
+
+  document.getElementById("stats-receptionist").innerHTML =
+    statCard("Total Appointments", APPOINTMENTS.length) +
+    statCard("Today's Bookings",   todayAppts.length) +
+    statCard("Escalations",        escalations.length);
+
+  document.getElementById("appt-body").innerHTML = APPOINTMENTS.map(a => `
+    <tr>
+      <td class="td-primary">${esc(a.patient_name)}</td>
+      <td class="td-muted">${esc(a.phone)}</td>
+      <td class="td-dim">${esc(a.requested_datetime)}</td>
+      <td class="td-dim">${esc(a.preferred_doctor)}</td>
+    </tr>`).join("");
+
+  document.getElementById("conv-receptionist").innerHTML = convCards("receptionist");
+}
+
+// ── Tab 3: Call Center ───────────────────────────────────────────────────────
+
+function renderCallCenter() {
+  const convos = CONVERSATIONS.filter(c => c.bot_id === "call_center");
+  const complaints = convos.filter(c => c.action_taken !== null);
+  const highUrgency = complaints.filter(c => c.action_taken?.urgency === "high");
+  const escalated   = complaints.filter(c => c.action_taken?.action  === "escalate");
+
+  document.getElementById("stats-callcenter").innerHTML =
+    statCard("Total Complaints", complaints.length) +
+    statCard("High Urgency",     highUrgency.length) +
+    statCard("Escalated",        escalated.length);
+
+  document.getElementById("complaint-feed").innerHTML = complaints.map(c => {
+    const m = c.action_taken;
+    const u = m.urgency || "low";
+    return `<div class="complaint-card">
+      <div class="complaint-card-header">
+        <span class="complaint-type">${esc(String(m.complaint_type || "").replace(/_/g," "))}</span>
+        <span class="urgency ${esc(u)}">${esc(u)}</span>
+      </div>
+      <div class="complaint-desc">${esc(m.description)}</div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("conv-callcenter").innerHTML = convCards("call_center");
+}
+
+// ── Tab 4: Concierge ─────────────────────────────────────────────────────────
+
+function renderConcierge() {
+  const convos = CONVERSATIONS.filter(c => c.bot_id === "concierge");
+  const rooms = convos.filter(c => c.action_taken?.booking_type === "room");
+  const food  = convos.filter(c => c.action_taken?.booking_type === "food_order");
+
+  document.getElementById("stats-concierge").innerHTML =
+    statCard("Room Bookings", rooms.length) +
+    statCard("Food Orders",   food.length);
+
+  document.getElementById("activity-feed").innerHTML = convos.map(c => {
+    const m = c.action_taken;
+    const type = m?.booking_type || null;
+    return `<div class="activity-card">
+      <div class="activity-header">
+        <span class="activity-user">${esc(c.user_id)}</span>
+        ${type ? `<span class="booking-tag">${esc(type.replace(/_/g," "))}</span>` : ""}
+      </div>
+      <div class="conv-msg user-msg"><span class="arrow">→ </span>${esc(c.user_message)}</div>
+      <div class="conv-msg bot-msg"><span class="arrow">← </span>${esc(c.bot_response)}</div>
+    </div>`;
+  }).join("");
+}
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+
+const RENDERERS = {
+  secretary:    renderSecretary,
+  receptionist: renderReceptionist,
+  callcenter:   renderCallCenter,
+  concierge:    renderConcierge,
+};
+
+function switchTab(tabId) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.toggle("active", p.id === "tab-" + tabId));
+
+  const ctx = CTX[tabId];
+  document.getElementById("ctx-intern").textContent = ctx.intern;
+  document.getElementById("ctx-domain").textContent = ctx.domain;
+  document.getElementById("ctx-botid").textContent  = ctx.botid;
+
+  RENDERERS[tabId]?.();
+}
+
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+
+renderSecretary();
+</script>
+</body>
+</html>
